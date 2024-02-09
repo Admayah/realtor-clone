@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -18,7 +17,6 @@ const SignUp = () => {
 	});
 
 	const { name, email, password } = formData;
-  const navigate = useNavigate();
 
 	const onChange = (e) => {
 		setFormData({
