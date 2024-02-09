@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getAuth } from "firebase/auth";
+import { getAuth, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db } from "../firebase";
@@ -23,12 +23,12 @@ const Profile = () => {
 	const onChange = (e) => {
 		setFormData({ ...formData, [e.target.id]: e.target.value });
 	};
-	const onSubmit = async (e) => {
-		e.preventDefault();
+	const onSubmit = async () => {
+		
 		try {
 			if (auth.currentUser.displayName !== name) {
 				// update display name in firebase auth
-				await auth.currentUser.updateProfile({
+				await updateProfile(auth.currentUser, {
 					displayName: name,
 				});
 
