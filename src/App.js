@@ -8,6 +8,7 @@ import {
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import PrivateRoute from "./components/PrivateRoute";
 import Offers from "./pages/Offers";
 import Profile from "./pages/Profile";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -42,7 +43,10 @@ function Root() {
 				<Route path="/sign-in" element={<SignIn />} />
 				<Route path="/sign-up" element={<SignUp />} />
 				<Route path="/offers" element={<Offers />} />
-				<Route path="/profile" element={<Profile />} />
+				<Route path="/profile" element={<PrivateRoute />} >
+				<Route path="" element={<Profile />} />
+				</Route>
+			
 				<Route path="/forgot-password" element={<ForgotPassword />} />
 			</Routes>
 			<ToastContainer
