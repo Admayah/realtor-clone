@@ -16,6 +16,7 @@ import Header from "./components/Header";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import CreateListing from "./pages/CreateListing";
 
 const router = createBrowserRouter([
 	{
@@ -46,8 +47,9 @@ function Root() {
 				<Route path="/profile" element={<PrivateRoute />} >
 				<Route path="" element={<Profile />} />
 				</Route>
-			
 				<Route path="/forgot-password" element={<ForgotPassword />} />
+				<Route path="/create-listing" element={<CreateListing />} />
+			
 			</Routes>
 			<ToastContainer
 				position="top-right"
