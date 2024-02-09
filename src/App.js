@@ -5,7 +5,6 @@ import {
 	Routes,
 } from "react-router-dom";
 
-
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
@@ -14,6 +13,8 @@ import Profile from "./pages/Profile";
 import ForgotPassword from "./pages/ForgotPassword";
 import Header from "./components/Header";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
 	{
@@ -44,6 +45,18 @@ function Root() {
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/forgot-password" element={<ForgotPassword />} />
 			</Routes>
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="dark"
+			/>
 		</>
 	);
 }

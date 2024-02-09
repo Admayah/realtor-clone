@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+
 import OAuth from "../components/OAuth";
+import {db} from "../firebase"
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -12,6 +18,7 @@ const SignUp = () => {
 	});
 
 	const { name, email, password } = formData;
+  const navigate = useNavigate();
 
 	const onChange = (e) => {
 		setFormData({
@@ -19,9 +26,35 @@ const SignUp = () => {
 			[e.target.id]: e.target.value,
 		});
 	};
+
+	const onSubmit = async(e) => {
+		e.preventDefault();
+		try {
+			const auth = getAuth();
+			const userCredentials = await createUserWithEmailAndPassword(
+				auth,
+				email,
+				password
+			);
+      updateProfile(auth.currentUser, {
+        displayName: name
+      })
+			const user = userCredentials.user;
+      const formDataCopy = {...formData}
+      delete formDataCopy.password
+      formDataCopy.timestamp = serverTimestamp()
+
+      await setDoc(doc(db, "users", user.uid), 
+    formDataCopy)
+    // toast.success("Sign up was successful")
+    //   navigate("/")
+		} catch (error) {
+			toast.error("Something went wrong. Try Again");
+		}
+	};
 	return (
 		<section>
-			<h1 className="text-3xl text-center mt-6 font-bold">Sign In</h1>
+			<h1 className="text-3xl text-center mt-6 font-bold">Sign Up</h1>
 			<div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
 				<div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6">
 					<img
@@ -31,7 +64,7 @@ const SignUp = () => {
 					/>
 				</div>
 				<div className="w-full md:w-[67%] lg:w-[40%] lg:ml-5">
-					<form>
+					<form onSubmit={onSubmit}>
 						<input
 							className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-6"
 							type="text"
