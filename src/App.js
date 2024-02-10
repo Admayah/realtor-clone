@@ -44,11 +44,14 @@ function Root() {
 				<Route path="/sign-in" element={<SignIn />} />
 				<Route path="/sign-up" element={<SignUp />} />
 				<Route path="/offers" element={<Offers />} />
-				<Route path="/profile" element={<PrivateRoute />} >
-				<Route path="" element={<Profile />} />
+				<Route path="profile" element={<PrivateRoute />} >
+				<Route path="/profile" element={<Profile />} />
 				</Route>
 				<Route path="/forgot-password" element={<ForgotPassword />} />
+				<Route path="create-listing" element={<PrivateRoute/>}>
 				<Route path="/create-listing" element={<CreateListing />} />
+				</Route>
+				
 			
 			</Routes>
 			<ToastContainer
