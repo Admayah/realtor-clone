@@ -139,7 +139,12 @@ const CreateListing = () => {
 			return;
 		});
 
-		const formDataCopy = { ...formData, imgUrls, timestamp: serverTimestamp() };
+		const formDataCopy = {
+			...formData,
+			imgUrls,
+			timestamp: serverTimestamp(),
+			useRef: auth.currentUser.uid,
+		};
 		delete formDataCopy.images;
 		!formDataCopy.offers && delete formDataCopy.discountedPrice;
 		const docRef = await addDoc(collection(db, "listings"), formDataCopy);
