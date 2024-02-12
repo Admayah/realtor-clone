@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { db } from "../firebase";
 import {
 	collection,
+	deleteDoc,
 	doc,
 	getDocs,
 	orderBy,
@@ -65,10 +66,14 @@ const Profile = () => {
 				// 	// orderBy("timestamp", "desc")
 				// );
 
-				const q = query(collection(db, "listings"), where("useRef", "==", auth.currentUser.uid), orderBy("timestamp", "desc"));
+				const q = query(
+					collection(db, "listings"),
+					where("useRef", "==", auth.currentUser.uid),
+					orderBy("timestamp", "desc")
+				);
 
 				const querySnapshot = await getDocs(q);
-		
+
 				let listings = [];
 				querySnapshot.forEach((doc) => {
 					return listings.push({
@@ -83,17 +88,26 @@ const Profile = () => {
 				setLoading(false);
 			}
 		};
-	
+
 		if (auth.currentUser) {
-			console.log("Authenticating", auth.currentUser)
+			console.log("Authenticating", auth.currentUser);
 			fetchUserListings();
 		}
 	}, [auth.currentUser]);
-	
-	
-	
 
-	console.log(listings, 'listings');
+	const onEdit = (listingId) => {
+		navigate(`/edit-listing/${listingId}`);
+	};
+	const onDelete = async (listingId) => {
+		if (window.confirm("Are you sure you want to delete this listing?")) {
+			await deleteDoc(doc(db, "listings", listingId));
+			const updatedListings = listings.filter(
+				(listing) => listing.id !== listingId
+			);
+			setListings(updatedListings);
+			toast.success("Listing deleted");
+		}
+	};
 
 	return (
 		<>
@@ -158,13 +172,17 @@ const Profile = () => {
 			<div className="max-w-6xl px-3 mt-6 mx-auto">
 				{!loading && listings.length > 0 && (
 					<>
-						<h2 className="text-2xl text-center font-semibold mb-6">My Listing</h2>
+						<h2 className="text-2xl text-center font-semibold mb-6">
+							My Listing
+						</h2>
 						<ul className="sm:grid sm:grid-cols-2 lg: grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 my-6">
 							{listings.map((listing) => (
 								<ListingItem
 									key={listing.id}
 									id={listing.id}
 									listing={listing.data}
+									onDelete={() => onDelete(listing.id)}
+									onEdit={() => onEdit(listing.id)}
 								/>
 							))}
 						</ul>
