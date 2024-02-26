@@ -95,7 +95,6 @@ const Home = () => {
           });
         });
         setSaleListings(listings);
-        console.log(listings, 'third sales');
       } catch (error) {
         console.log(error);
       }
