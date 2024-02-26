@@ -44,7 +44,6 @@ const Contact = ({ listing, userRef }) => {
           </div>
           <button
             onClick={() =>{
-                console.log('uuuuu');
                 window.location.href = `mailto:${landlord.email}?Subject=${listing.name}&body=${message}`
             }
             }

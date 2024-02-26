@@ -20,19 +20,19 @@ const Offers = () => {
   const [lastFetchedListing, setLastFetchedListing] = useState(null)
 
   useEffect(() => {
-    const fetchListings = async () => {
+    const fetchListings = async() => {
       try {
         const listingRef = collection(db, "listings");
         const q = query(
           listingRef,
-          where("offers", "==", true),
+          where("offer", "==", true),
           orderBy("timestamp", "desc"),
           limit(8)
         );
         const querySnap = await getDocs(q);
-        const lastVisible = querySnap.docs(querySnap.docs.length - 1)
-        setLastFetchedListing(lastFetchedListing)
-        const listings = [];
+        const lastVisible = querySnap.docs[querySnap.docs.length - 1]
+        setLastFetchedListing(lastVisible)
+        let listings = [];
         querySnap.forEach((doc) => {
           return listings.push({
             id: doc.id,
@@ -40,7 +40,6 @@ const Offers = () => {
           });
         });
         setListings(listings);
-        console.log(listings, 'kkk')
         setLoading(false);
       } catch (error) {
         toast.error("Could not fetch listings");
@@ -54,14 +53,14 @@ const Offers = () => {
       const listingRef = collection(db, "listings");
       const q = query(
         listingRef,
-        where("offers", "==", true),
+        where("offer", "==", true),
         orderBy("timestamp", "desc"),
         startAfter(lastFetchedListing),
         limit(4)
       );
       const querySnap = await getDocs(q);
-      const lastVisible = querySnap.docs(querySnap.docs.length - 1)
-      setLastFetchedListing(lastFetchedListing)
+      const lastVisible = querySnap.docs[querySnap.docs.length - 1]
+      setLastFetchedListing(lastVisible)
       const listings = [];
       querySnap.forEach((doc) => {
         return listings.push({
@@ -70,7 +69,6 @@ const Offers = () => {
         });
       });
       setListings((prevState)=>[...prevState, ...listings]);
-      console.log(listings, 'kkk')
       setLoading(false);
     } catch (error) {
       toast.error("Could not fetch listings");

@@ -124,13 +124,11 @@ const EditListing = () => {
 		}
 
 		const storeImage = async (image) => {
-			console.log(image);
 			return new Promise((resolve, reject) => {
 				const storage = getStorage();
 				const filename = `${auth.currentUser.uid} - ${image.name}-${uuidv4()}`;
 				const storageRef = ref(storage, filename);
 				const uploadTask = uploadBytesResumable(storageRef, image);
-				console.log(uploadTask, "task");
 
 				// Listen for state changes, errors, and completion of the upload.
 				uploadTask.on(

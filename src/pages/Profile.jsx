@@ -90,7 +90,6 @@ const Profile = () => {
 		};
 
 		if (auth.currentUser) {
-			console.log("Authenticating", auth.currentUser);
 			fetchUserListings();
 		}
 	}, [auth.currentUser]);

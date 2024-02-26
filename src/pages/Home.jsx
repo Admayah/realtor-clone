@@ -39,7 +39,6 @@ const Home = () => {
           });
         });
         setOfferListings(listings);
-        console.log(listings, 'first....')
       } catch (error) {
         console.log(error);
       }
@@ -68,7 +67,6 @@ const Home = () => {
           });
         });
         setRentListings(listings);
-        console.log(listings, 'second which is rent');
       } catch (error) {
         console.log(error);
       }

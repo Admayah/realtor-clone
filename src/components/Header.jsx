@@ -21,7 +21,6 @@ const Header = () => {
 
 	const pathMatchRoute = (route) => {
 		if (route === location.pathname) {
-			console.log("hello", location.pathname, route);
 			return true;
 		}
 	};
