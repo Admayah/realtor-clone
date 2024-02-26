@@ -31,7 +31,6 @@ const Slider = () => {
         });
       });
       setListings(listings);
-      console.log(listings, "mmmm");
       setLoading(false);
     };
 

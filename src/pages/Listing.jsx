@@ -46,6 +46,8 @@ const Listing = () => {
 
   if (loading) return <Spinner />;
 
+  console.log(listing.imgUrls[0]);
+
   return (
     <main>
       <Swiper

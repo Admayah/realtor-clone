@@ -51,6 +51,7 @@ const CreateListing = () => {
 
 	const navigate = useNavigate();
 
+	console.log(images, 'images...');
 	const auth = getAuth();
 
 	const onChange = (e) => {

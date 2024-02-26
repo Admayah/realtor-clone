@@ -39,6 +39,7 @@ const Home = () => {
           });
         });
         setOfferListings(listings);
+        console.log(listings, 'first....')
       } catch (error) {
         console.log(error);
       }
@@ -67,6 +68,7 @@ const Home = () => {
           });
         });
         setRentListings(listings);
+        console.log(listings, 'second which is rent');
       } catch (error) {
         console.log(error);
       }
@@ -95,6 +97,7 @@ const Home = () => {
           });
         });
         setSaleListings(listings);
+        console.log(listings, 'third sales');
       } catch (error) {
         console.log(error);
       }
@@ -140,7 +143,7 @@ const Home = () => {
                 <ListingItem
                   key={listing.id}
                   id={listing.id}
-                  data={listing.data}
+                  listing={listing.data}
                 />
               ))}
             </ul>
@@ -157,13 +160,13 @@ const Home = () => {
               </p>
             </Link>
             <ul className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {saleListings.map((listing) => (
+              {saleListings.map((listing) => 
                 <ListingItem
                   key={listing.id}
                   id={listing.id}
-                  data={listing.data}
+                  listing={listing.data}
                 />
-              ))}
+              )}
             </ul>
           </div>
         )}
