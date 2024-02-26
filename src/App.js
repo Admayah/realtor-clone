@@ -19,6 +19,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import CreateListing from "./pages/CreateListing";
 import EditListing from "./pages/EditListing";
 import Listing from "./pages/Listing";
+import Category from "./pages/Category";
 
 const router = createBrowserRouter([
 	{
@@ -46,6 +47,7 @@ function Root() {
 				<Route path="/sign-in" element={<SignIn />} />
 				<Route path="/sign-up" element={<SignUp />} />
 				<Route path="/offers" element={<Offers />} />
+				<Route path="/category/:categoryName" element={<Category />} />
 				<Route path="/category/:categoryName/:listingId" element={<Listing />} />
 				<Route path="profile" element={<PrivateRoute />} >
 				<Route path="/profile" element={<Profile />} />
