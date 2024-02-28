@@ -26,7 +26,7 @@ const Home = () => {
         const listingRef = collection(db, "listings");
         const q = query(
           listingRef,
-          where("offer", "==", true),
+          where("offers", "==", true),
           orderBy("timestamp", "desc"),
           limit(4)
         );
@@ -119,7 +119,7 @@ const Home = () => {
                 <ListingItem
                   key={listing.id}
                   id={listing.id}
-                  data={listing.data}
+                  listing={listing.data}
                 />
               ))}
             </ul>

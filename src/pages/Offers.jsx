@@ -25,7 +25,7 @@ const Offers = () => {
         const listingRef = collection(db, "listings");
         const q = query(
           listingRef,
-          where("offer", "==", true),
+          where("offers", "==", true),
           orderBy("timestamp", "desc"),
           limit(8)
         );
@@ -75,6 +75,7 @@ const Offers = () => {
     }
   }
 
+
   return (
     <div className="max-w-6xl mx-auto px-3">
       <h1 className="text-3xl text-center mt-6 font-bold">Offers</h1>
@@ -83,7 +84,7 @@ const Offers = () => {
       ) : listings && listings.length > 0 ? (
         <>
         <main>
-          <ul className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          <ul className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
             {listings.map((listing) => (
               <ListingItem
                 key={listing.id}

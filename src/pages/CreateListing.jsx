@@ -349,6 +349,7 @@ const CreateListing = () => {
 					<button
 						type="button"
 						id="offers"
+						name="offers"
 						value={true}
 						onClick={onChange}
 						className={`px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
@@ -360,6 +361,7 @@ const CreateListing = () => {
 					<button
 						type="button"
 						id="offers"
+						name="offers"
 						value={false}
 						onClick={onChange}
 						className={`px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
